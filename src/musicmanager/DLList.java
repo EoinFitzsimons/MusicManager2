@@ -4,6 +4,8 @@
  */
 package musicmanager;
 
+import static musicmanager.MusicManagerGUI.repeat;
+
 /**
  *
  * @author eoin0
@@ -137,17 +139,27 @@ public class DLList implements LinkedListInterface {
         return false;
     }
 
-    public void loopList(boolean repeat) {
-        Node current = head;
-        while (repeat) {
-            System.out.println(current.getElement());
-            if (current.getNext() != null) {
-                current = current.getNext();
-            } else {
-                current = head; // Go back to the start of the list
-                System.out.println("The playlist has looped back to the start.");
-            }
+public void loopList() {
+    if (head == null) {
+        System.out.println("The playlist is empty.");
+        return;
+    }
+    Node current = head;
+    while (repeat && current != null) {
+        System.out.println(current.getElement());
+        try { // pausing so the songs don't just blitz through
+            Thread.sleep(1000); // Pause for 1 second
+        } catch (InterruptedException e) {
+        }
+        if (current.getNext() != null) {
+            current = current.getNext();
+        } else {
+            current = head; //back to the start of the list
+            System.out.println("The playlist has looped back to the start.");
         }
     }
+}
+
+
 
 }
