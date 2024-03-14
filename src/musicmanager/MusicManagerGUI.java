@@ -171,6 +171,11 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         buttonGroup1.add(goodRB);
         goodRB.setForeground(new java.awt.Color(255, 255, 255));
         goodRB.setText("Good");
+        goodRB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goodRBActionPerformed(evt);
+            }
+        });
 
         badRB.setBackground(new java.awt.Color(80, 45, 150));
         buttonGroup1.add(badRB);
@@ -406,9 +411,6 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-
-
     StackInterface likedSongs = new MyStack();
     DLList goodPlaylist = new DLList();
     DLList badPlaylist = new DLList();
@@ -419,10 +421,6 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         repeatLBL.setText(repeat ? "Repeat" : ""); //shows repeat if it's on
     }//GEN-LAST:event_repeatMIActionPerformed
 
-    private void badRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_badRBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_badRBActionPerformed
-
     private void createBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBTNActionPerformed
         // TODO add your handling code here:
         likedSongs.push(JOptionPane.showInputDialog("Please enter a song"));
@@ -431,23 +429,67 @@ public class MusicManagerGUI extends javax.swing.JFrame {
 
     private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
         // TODO add your handling code here:
-        if (!likedSongs.isEmpty()) { // if there are any liked songs
-        String song = (String) likedSongs.pop();
-        if (goodRB.isSelected()) {
-            goodPlaylist.add(song);
-        } else if (badRB.isSelected()) {
-            badPlaylist.add(song);
+        if (!likedSongs.isEmpty() && (goodRB.isSelected() || badRB.isSelected()) ) { // if there are any liked songs
+            String song = (String) likedSongs.pop();
+            if (goodRB.isSelected()) {
+                goodPlaylist.add(song);
+                playlistTA.setText(goodPlaylist.printList());
+            } else if (badRB.isSelected()) {
+                badPlaylist.add(song);
+                playlistTA.setText(badPlaylist.printList());
+            }
+            likedTA.setText(likedSongs.display());
         }
-    }
     }//GEN-LAST:event_addBTNActionPerformed
-
+//public boolean contains(Object element) {
+//        Node current = head;
+//        while (current != null) {
+//            if (current.getElement().equals(element)) { // if the name matches the element 
+//                return true;
+//            }
+//            current = current.getNext(); // move on
+//        } // current is null when there is nothing next
+//        return false;
+//    }
     private void SearchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBTNActionPerformed
         // TODO add your handling code here:
+        String song = JOptionPane.showInputDialog("Enter a song to search:");
+        if (goodPlaylist.contains(song)) {
+            JOptionPane.showMessageDialog(null, "The song is in the Good Playlist.");
+            playlistTA.setText(goodPlaylist.printList());
+        } else if (badPlaylist.contains(song)) {
+            JOptionPane.showMessageDialog(null, "The song is in the Bad Playlist.");
+            playlistTA.setText(badPlaylist.printList());
+        } else {
+            JOptionPane.showMessageDialog(null, "The song is not in any playlist.");
+        }
     }//GEN-LAST:event_SearchBTNActionPerformed
 
     private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
         // TODO add your handling code here:
+        String song = JOptionPane.showInputDialog("Enter a song to delete:");
+    if (goodPlaylist.contains(song)) {
+        goodPlaylist.remove(song);
+        JOptionPane.showMessageDialog(null, "The song has been removed from the Good Playlist.");
+        playlistTA.setText(goodPlaylist.printList());
+    } else if (badPlaylist.contains(song)) {
+        badPlaylist.remove(song);
+        JOptionPane.showMessageDialog(null, "The song has been removed from the Bad Playlist.");
+        playlistTA.setText(badPlaylist.printList());
+    } else {
+        JOptionPane.showMessageDialog(null, "The song is not in any playlist.");
+    }
     }//GEN-LAST:event_deleteBTNActionPerformed
+
+    private void goodRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goodRBActionPerformed
+        // TODO add your handling code here:
+        playlistTA.setText(goodPlaylist.printList());
+    }//GEN-LAST:event_goodRBActionPerformed
+
+    private void badRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_badRBActionPerformed
+        // TODO add your handling code here:
+        playlistTA.setText(badPlaylist.printList());
+    }//GEN-LAST:event_badRBActionPerformed
 
     /**
      * @param args the command line arguments

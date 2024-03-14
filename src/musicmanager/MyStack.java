@@ -59,7 +59,7 @@ public class MyStack implements StackInterface {
 //      display stack from top zero index to the bottom
             String str = "";
             if (isEmpty()) {
-                str = str.concat("Empty stack, nothing to display");
+                str = str.concat("-Empty-");
             } else {
 //            for(int i = 0; i < aStack.size(); i++){
 //                str = str.concat(aStack.get(i));

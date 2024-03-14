@@ -12,9 +12,9 @@ public interface LinkedListInterface {
     	public boolean isEmpty();
 	public int size();
 	public Object get(int index);
-	public void remove(int index);
+	public void remove(String song);
 	public void add(Object theElement, int index);
 	public void add(Object theElement);
-	public void printList();
+	public String printList();
 
 }
