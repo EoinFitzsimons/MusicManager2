@@ -136,4 +136,18 @@ public class DLList implements LinkedListInterface {
         } // current is null when there is nothing next
         return false;
     }
+
+    public void loopList(boolean repeat) {
+        Node current = head;
+        while (repeat) {
+            System.out.println(current.getElement());
+            if (current.getNext() != null) {
+                current = current.getNext();
+            } else {
+                current = head; // Go back to the start of the list
+                System.out.println("The playlist has looped back to the start.");
+            }
+        }
+    }
+
 }
