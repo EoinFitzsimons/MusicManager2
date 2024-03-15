@@ -449,16 +449,25 @@ public class MusicManagerGUI extends javax.swing.JFrame {
             }).start();
         }
     }//GEN-LAST:event_repeatMIActionPerformed
+// Define a method to convert inputs to the same case.
 public static String toTitleCase(String givenString) {
-    String[] arr = givenString.split(" ");
+    // Split the input string into an array of words
+    String[] arr = givenString.split(" "); // Also works for multiple spaces in a row.
+    // Create a StringBuilder to build the output string
     StringBuilder sb = new StringBuilder();
 
+    // Loop through each word in the array
     for (int i = 0; i < arr.length; i++) {
+        // Append the first character of the word converted to uppercase
         sb.append(Character.toUpperCase(arr[i].charAt(0)))
-            .append(arr[i].substring(1)).append(" ");
+            // Append the rest of the word converted to lowercase
+            .append(arr[i].substring(1).toLowerCase())
+            // Append a space after each word
+            .append(" ");
     }          
+    // Return the output string with leading and trailing spaces removed
     return sb.toString().trim();
-}  
+} 
     private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
 
         String song = JOptionPane.showInputDialog("Enter a song to delete:");
