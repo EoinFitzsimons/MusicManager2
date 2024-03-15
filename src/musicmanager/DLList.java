@@ -99,7 +99,7 @@ public class DLList implements LinkedListInterface {
         StringBuilder listString = new StringBuilder();
         for (Node aNode = head; aNode != null; aNode = aNode.getNext()) {
             listString.append(aNode.getElement().toString());
-            listString.append("\n");
+            listString.append("\n");//new line
         }
         return listString.toString();
     }
@@ -121,7 +121,7 @@ public class DLList implements LinkedListInterface {
                 if (current.getPrev() != null) {
                     current.getPrev().setNext(current.getNext());
                 }
-                size--;
+                size--;// reduce playlist size
                 return;
             }
             current = current.getNext();
@@ -149,13 +149,14 @@ public void loopList() {
         System.out.println(current.getElement());
         try { // pausing so the songs don't just blitz through
             Thread.sleep(1000); // Pause for 1 second
-        } catch (InterruptedException e) {
+        } catch (InterruptedException e) { // if interupted elsewhere it stops
+            repeat = false;
         }
-        if (current.getNext() != null) {
+        if (current.getNext() != null) {// whilere there are more songs
             current = current.getNext();
         } else {
             current = head; //back to the start of the list
-            System.out.println("The playlist has looped back to the start.");
+            System.out.println("The playlist has looped back to the start.");// to show this works
         }
     }
 }

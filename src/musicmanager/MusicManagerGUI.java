@@ -83,7 +83,6 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         genresongsLBL.setForeground(new java.awt.Color(255, 255, 255));
         genresongsLBL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         genresongsLBL.setText("Playlist Songs");
-        genresongsLBL.setMaximumSize(new java.awt.Dimension(145, 23));
 
         repeatLBL.setForeground(new java.awt.Color(255, 255, 255));
         repeatLBL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -308,7 +307,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
                     .addComponent(sizeLBL, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(likedLBL)
-                        .addComponent(genresongsLBL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(genresongsLBL)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(playlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(playlistPanelLayout.createSequentialGroup()
@@ -428,7 +427,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    StackInterface likedSongs = new MyStack();
+    StackInterface likedSongs = new MyStack(); // creating the playlists
     DLList goodPlaylist = new DLList();
     DLList badPlaylist = new DLList();
     static boolean repeat = false; // declare repeat status
@@ -438,10 +437,10 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         repeat = !repeat; // Toggle the status
         repeatLBL.setText(repeat ? "Repeat" : ""); //shows repeat if it's on
         if (repeat && (!goodPlaylist.isEmpty() || !badPlaylist.isEmpty())) {
-            if (goodRB.isSelected()) {
+            if (goodRB.isSelected() && !goodPlaylist.isEmpty()) {
                 // Start looping through the list
                 new Thread(() -> goodPlaylist.loopList()).start();
-            } else if (badRB.isSelected()) {
+            } else if (badRB.isSelected() && !badPlaylist.isEmpty()) {
                 // Start looping through the list
                 new Thread(() -> badPlaylist.loopList()).start();
             }
@@ -451,15 +450,15 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     private void viewBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBTNActionPerformed
         // TODO add your handling code here:
         likedTA.setText(likedSongs.display());
-        likedLBL.setText("Liked "+likedSongs.size());
+        likedLBL.setText("Liked " + likedSongs.size());
         if (goodRB.isSelected()) {
-                // Count good songs
-                genresongsLBL.setText("Playlist "+goodPlaylist.size());
-            } else if (badRB.isSelected()) {
-                // Count bad songs
-                genresongsLBL.setText("Playlist "+badPlaylist.size());
-            }
-        
+            // Count good songs
+            genresongsLBL.setText("Playlist " + goodPlaylist.size());
+        } else if (badRB.isSelected()) {
+            // Count bad songs
+            genresongsLBL.setText("Playlist " + badPlaylist.size());
+        }
+
     }//GEN-LAST:event_viewBTNActionPerformed
 
     private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
@@ -469,28 +468,28 @@ public class MusicManagerGUI extends javax.swing.JFrame {
             goodPlaylist.remove(song);
             JOptionPane.showMessageDialog(null, "The song has been removed from the Good Playlist.");
             playlistTA.setText(goodPlaylist.printList());
-            genresongsLBL.setText("Playlist "+goodPlaylist.size());
+            genresongsLBL.setText("Playlist " + goodPlaylist.size());
         } else if (badPlaylist.contains(song)) {
             badPlaylist.remove(song);
             JOptionPane.showMessageDialog(null, "The song has been removed from the Bad Playlist.");
             playlistTA.setText(badPlaylist.printList());
-            genresongsLBL.setText("Playlist "+badPlaylist.size());
+            genresongsLBL.setText("Playlist " + badPlaylist.size());
         } else {
             JOptionPane.showMessageDialog(null, "The song is not in any playlist.");
         }
     }//GEN-LAST:event_deleteBTNActionPerformed
-
+//delete and search self explanatory here
     private void SearchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBTNActionPerformed
         // TODO add your handling code here:
         String song = JOptionPane.showInputDialog("Enter a song to search:");
         if (goodPlaylist.contains(song)) {
             JOptionPane.showMessageDialog(null, "The song is in the Good Playlist.");
             playlistTA.setText(goodPlaylist.printList());
-            genresongsLBL.setText("Playlist "+goodPlaylist.size());
+            genresongsLBL.setText("Playlist " + goodPlaylist.size());
         } else if (badPlaylist.contains(song)) {
             JOptionPane.showMessageDialog(null, "The song is in the Bad Playlist.");
             playlistTA.setText(badPlaylist.printList());
-            genresongsLBL.setText("Playlist "+badPlaylist.size());
+            genresongsLBL.setText("Playlist " + badPlaylist.size());
         } else {
             JOptionPane.showMessageDialog(null, "The song is not in any playlist.");
         }
@@ -498,20 +497,21 @@ public class MusicManagerGUI extends javax.swing.JFrame {
 
     private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
         // TODO add your handling code here:
-        if (!likedSongs.isEmpty() && (goodRB.isSelected() || badRB.isSelected())) { // if there are any liked songs
+        if (!likedSongs.isEmpty() && (goodRB.isSelected() || badRB.isSelected())) { // if there are any liked songs and no point continuing if a playlist isn't selected
             String song = (String) likedSongs.pop();
             if (goodRB.isSelected()) {
                 goodPlaylist.add(song);
                 playlistTA.setText(goodPlaylist.printList());
-                genresongsLBL.setText("Playlist "+goodPlaylist.size());
-                likedLBL.setText("Liked "+likedSongs.size());
+                genresongsLBL.setText("Playlist " + goodPlaylist.size());
+                likedLBL.setText("Liked " + likedSongs.size());
             } else if (badRB.isSelected()) {
                 badPlaylist.add(song);
                 playlistTA.setText(badPlaylist.printList());
-                genresongsLBL.setText("Playlist "+badPlaylist.size());
-                likedLBL.setText("Liked "+likedSongs.size());
+                genresongsLBL.setText("Playlist " + badPlaylist.size());
+                likedLBL.setText("Liked " + likedSongs.size());
             }
             likedTA.setText(likedSongs.display());
+            likedLBL.setText("Liked " + likedSongs.size());
         }
     }//GEN-LAST:event_addBTNActionPerformed
 
@@ -519,12 +519,13 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         likedSongs.push(JOptionPane.showInputDialog("Please enter a song"));
         likedTA.setText(likedSongs.display());
+        likedLBL.setText("Liked " + likedSongs.size());
     }//GEN-LAST:event_createBTNActionPerformed
 
     private void badRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_badRBActionPerformed
         // TODO add your handling code here:
         playlistTA.setText(badPlaylist.printList());
-        genresongsLBL.setText("Playlist "+badPlaylist.size());
+        genresongsLBL.setText("Playlist " + badPlaylist.size());
         if (repeat) {
             // Stop looping the badPlaylist
             repeat = false;
@@ -539,12 +540,12 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     private void goodRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goodRBActionPerformed
         // TODO add your handling code here:
         playlistTA.setText(goodPlaylist.printList());
-        genresongsLBL.setText("Playlist "+goodPlaylist.size());
-        if (repeat) {
+        genresongsLBL.setText("Playlist " + goodPlaylist.size());
+        if (repeat) {// if it is repeating
             // Stop looping the goodPlaylist
             repeat = false;
             // Start looping the badPlaylist
-            new Thread(() -> {
+            new Thread(() -> { //allows this to run without disupting the main flow of code
                 repeat = true;
                 badPlaylist.loopList();
             }).start();
