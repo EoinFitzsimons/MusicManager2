@@ -49,8 +49,8 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         addBTN = new javax.swing.JButton();
         SearchBTN = new javax.swing.JButton();
         deleteBTN = new javax.swing.JButton();
-        viewBTN = new javax.swing.JButton();
         sizeLBL = new javax.swing.JLabel();
+        moveBTN = new javax.swing.JButton();
         titleLBL = new javax.swing.JLabel();
         songPB = new javax.swing.JProgressBar();
         playBTN = new javax.swing.JButton();
@@ -257,19 +257,19 @@ public class MusicManagerGUI extends javax.swing.JFrame {
             }
         });
 
-        viewBTN.setText("View");
-        viewBTN.setMaximumSize(new java.awt.Dimension(80, 25));
-        viewBTN.setMinimumSize(new java.awt.Dimension(80, 25));
-        viewBTN.setPreferredSize(new java.awt.Dimension(80, 25));
-        viewBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewBTNActionPerformed(evt);
-            }
-        });
-
         sizeLBL.setFont(new java.awt.Font("Magneto", 0, 12)); // NOI18N
         sizeLBL.setForeground(new java.awt.Color(255, 255, 255));
         sizeLBL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        moveBTN.setText("Move");
+        moveBTN.setMaximumSize(new java.awt.Dimension(80, 25));
+        moveBTN.setMinimumSize(new java.awt.Dimension(80, 25));
+        moveBTN.setPreferredSize(new java.awt.Dimension(80, 25));
+        moveBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveBTNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout playlistPanelLayout = new javax.swing.GroupLayout(playlistPanel);
         playlistPanel.setLayout(playlistPanelLayout);
@@ -283,15 +283,15 @@ public class MusicManagerGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(playlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(likedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(likedLBL)
-                    .addComponent(viewBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(likedLBL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(playlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(addBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SearchBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(moveBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(playlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(genrePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,21 +312,22 @@ public class MusicManagerGUI extends javax.swing.JFrame {
                 .addGroup(playlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(playlistPanelLayout.createSequentialGroup()
                         .addComponent(createBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
+                        .addGap(18, 18, 18)
                         .addComponent(selectorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                        .addGap(18, 18, 18)
                         .addComponent(addBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SearchBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(deleteBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(moveBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(likedPanel, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                     .addComponent(genrePanel, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(playlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(repeatLBL)
-                    .addComponent(viewBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addComponent(repeatLBL)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         titleLBL.setFont(new java.awt.Font("Magneto", 0, 36)); // NOI18N
@@ -363,25 +364,21 @@ public class MusicManagerGUI extends javax.swing.JFrame {
             .addGroup(backgroundPanelLayout.createSequentialGroup()
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(songPB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(236, 236, 236)
+                        .addComponent(titleLBL))
                     .addGroup(backgroundPanelLayout.createSequentialGroup()
+                        .addGap(267, 267, 267)
+                        .addComponent(prevBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(playBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nextBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(backgroundPanelLayout.createSequentialGroup()
+                        .addGap(153, 153, 153)
                         .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(backgroundPanelLayout.createSequentialGroup()
-                                .addGap(236, 236, 236)
-                                .addComponent(titleLBL))
-                            .addGroup(backgroundPanelLayout.createSequentialGroup()
-                                .addGap(267, 267, 267)
-                                .addComponent(prevBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(playBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nextBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(backgroundPanelLayout.createSequentialGroup()
-                                .addGap(153, 153, 153)
-                                .addComponent(playlistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 147, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(songPB, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(playlistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         backgroundPanelLayout.setVerticalGroup(
             backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,29 +444,15 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_repeatMIActionPerformed
 
-    private void viewBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBTNActionPerformed
-        // TODO add your handling code here:
-        likedTA.setText(likedSongs.display());
-        likedLBL.setText("Liked " + likedSongs.size());
-        if (goodRB.isSelected()) {
-            // Count good songs
-            genresongsLBL.setText("Playlist " + goodPlaylist.size());
-        } else if (badRB.isSelected()) {
-            // Count bad songs
-            genresongsLBL.setText("Playlist " + badPlaylist.size());
-        }
-
-    }//GEN-LAST:event_viewBTNActionPerformed
-
     private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
         // TODO add your handling code here:
         String song = JOptionPane.showInputDialog("Enter a song to delete:");
-        if (goodPlaylist.contains(song)) {
+        if (goodPlaylist.contains(song)) {// If the song is in the good playlist
             goodPlaylist.remove(song);
             JOptionPane.showMessageDialog(null, "The song has been removed from the Good Playlist.");
             playlistTA.setText(goodPlaylist.printList());
             genresongsLBL.setText("Playlist " + goodPlaylist.size());
-        } else if (badPlaylist.contains(song)) {
+        } else if (badPlaylist.contains(song)) {// If the song is in the bad playlist
             badPlaylist.remove(song);
             JOptionPane.showMessageDialog(null, "The song has been removed from the Bad Playlist.");
             playlistTA.setText(badPlaylist.printList());
@@ -482,11 +465,11 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     private void SearchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBTNActionPerformed
         // TODO add your handling code here:
         String song = JOptionPane.showInputDialog("Enter a song to search:");
-        if (goodPlaylist.contains(song)) {
+        if (goodPlaylist.contains(song)) {// If the song is in the good playlist
             JOptionPane.showMessageDialog(null, "The song is in the Good Playlist.");
             playlistTA.setText(goodPlaylist.printList());
             genresongsLBL.setText("Playlist " + goodPlaylist.size());
-        } else if (badPlaylist.contains(song)) {
+        } else if (badPlaylist.contains(song)) {// If the song is in the bad playlist
             JOptionPane.showMessageDialog(null, "The song is in the Bad Playlist.");
             playlistTA.setText(badPlaylist.printList());
             genresongsLBL.setText("Playlist " + badPlaylist.size());
@@ -498,7 +481,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
         // TODO add your handling code here:
         if (!likedSongs.isEmpty() && (goodRB.isSelected() || badRB.isSelected())) { // if there are any liked songs and no point continuing if a playlist isn't selected
-            String song = (String) likedSongs.pop();
+            String song = (String) likedSongs.pop();// Pop off top song
             if (goodRB.isSelected()) {
                 goodPlaylist.add(song);
                 playlistTA.setText(goodPlaylist.printList());
@@ -510,7 +493,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
                 genresongsLBL.setText("Playlist " + badPlaylist.size());
                 likedLBL.setText("Liked " + likedSongs.size());
             }
-            likedTA.setText(likedSongs.display());
+            likedTA.setText(likedSongs.display()); //Update liked songs to show the song is gone
             likedLBL.setText("Liked " + likedSongs.size());
         }
     }//GEN-LAST:event_addBTNActionPerformed
@@ -551,6 +534,48 @@ public class MusicManagerGUI extends javax.swing.JFrame {
             }).start();
         }
     }//GEN-LAST:event_goodRBActionPerformed
+
+    private void moveBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveBTNActionPerformed
+        // TODO add your handling code here:
+        //control the loop
+        boolean continueMoving = true;
+
+        while (continueMoving) {
+            String song = JOptionPane.showInputDialog("Enter a song to move:");
+
+            if (goodPlaylist.contains(song)) {
+                // If the song is in the good playlist
+                goodPlaylist.remove(song); // Remove the song from the good playlist
+                badPlaylist.add(song); // Add the song to the bad playlist
+                JOptionPane.showMessageDialog(null, "The song has been moved to the Bad Playlist.");
+            } else if (badPlaylist.contains(song)) {
+                // If the song is in the bad playlist
+                badPlaylist.remove(song); // Remove the song from the bad playlist
+                goodPlaylist.add(song); // Add the song to the good playlist
+                JOptionPane.showMessageDialog(null, "The song has been moved to the Good Playlist.");
+            } else {
+                JOptionPane.showMessageDialog(null, "The song is not in any playlist.");
+            }
+
+            // Ask if they want to move more 
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to move more songs?", "Confirm",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if (response == JOptionPane.NO_OPTION) {
+                // if no, exit the loop
+                continueMoving = false;
+            }
+        }
+
+        // After all moves are done, update the display based on good or bad selected
+        if (goodRB.isSelected()) {
+            playlistTA.setText(goodPlaylist.printList());
+            genresongsLBL.setText("Playlist " + goodPlaylist.size());
+        } else if (badRB.isSelected()) {
+            playlistTA.setText(badPlaylist.printList());
+            genresongsLBL.setText("Playlist " + badPlaylist.size());
+        }
+    }//GEN-LAST:event_moveBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -605,6 +630,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane likedSP;
     private javax.swing.JTextArea likedTA;
     private javax.swing.JMenuBar menusMB;
+    private javax.swing.JButton moveBTN;
     private javax.swing.JButton nextBTN;
     private javax.swing.JButton playBTN;
     private javax.swing.JPanel playlistPanel;
@@ -617,6 +643,5 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     private javax.swing.JLabel sizeLBL;
     private javax.swing.JProgressBar songPB;
     private javax.swing.JLabel titleLBL;
-    private javax.swing.JButton viewBTN;
     // End of variables declaration//GEN-END:variables
 }
