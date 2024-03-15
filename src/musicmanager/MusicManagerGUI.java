@@ -536,9 +536,10 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         // If the likedSongs stack is not full
         if (likedSongs.size() < 10) {
             String song = JOptionPane.showInputDialog("Please enter a song");
-            song = toTitleCase(song); // Convert to title case
+            
             if (song != null && !song.trim().isEmpty()) {// inverse of trim being empty ensures there is at least one character with a physical representation ie not whitespace
                 // If the input is not null and not blank
+                song = toTitleCase(song); // Convert to title case
                 likedSongs.push(song);
                 likedTA.setText(likedSongs.display());
                 likedLBL.setText("Liked " + likedSongs.size());
