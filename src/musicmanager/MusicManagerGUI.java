@@ -65,6 +65,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         backgroundPanel.setBackground(new java.awt.Color(25, 17, 50));
@@ -346,18 +347,33 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         playBTN.setMaximumSize(new java.awt.Dimension(80, 25));
         playBTN.setMinimumSize(new java.awt.Dimension(80, 25));
         playBTN.setPreferredSize(new java.awt.Dimension(80, 25));
+        playBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playBTNActionPerformed(evt);
+            }
+        });
 
         nextBTN.setForeground(new java.awt.Color(50, 25, 100));
         nextBTN.setText("Next");
         nextBTN.setMaximumSize(new java.awt.Dimension(80, 25));
         nextBTN.setMinimumSize(new java.awt.Dimension(80, 25));
         nextBTN.setPreferredSize(new java.awt.Dimension(80, 25));
+        nextBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextBTNActionPerformed(evt);
+            }
+        });
 
         prevBTN.setForeground(new java.awt.Color(50, 25, 100));
         prevBTN.setText("Prev");
         prevBTN.setMaximumSize(new java.awt.Dimension(80, 25));
         prevBTN.setMinimumSize(new java.awt.Dimension(80, 25));
         prevBTN.setPreferredSize(new java.awt.Dimension(80, 25));
+        prevBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prevBTNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundPanelLayout = new javax.swing.GroupLayout(backgroundPanel);
         backgroundPanel.setLayout(backgroundPanelLayout);
@@ -396,11 +412,12 @@ public class MusicManagerGUI extends javax.swing.JFrame {
                     .addComponent(playBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nextBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(prevBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         controlsM.setText("Controls");
 
+        repeatMI.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         repeatMI.setText("Repeat");
         repeatMI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -421,8 +438,10 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+            .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
         );
+
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -651,6 +670,18 @@ public class MusicManagerGUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_moveBTNActionPerformed
+
+    private void prevBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevBTNActionPerformed
+        JOptionPane.showMessageDialog(null, "Feature not yet implemented.");
+    }//GEN-LAST:event_prevBTNActionPerformed
+
+    private void playBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playBTNActionPerformed
+        JOptionPane.showMessageDialog(null, "Feature not yet implemented.");
+    }//GEN-LAST:event_playBTNActionPerformed
+
+    private void nextBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextBTNActionPerformed
+        JOptionPane.showMessageDialog(null, "Feature not yet implemented.");
+    }//GEN-LAST:event_nextBTNActionPerformed
 
     /**
      * @param args the command line arguments
