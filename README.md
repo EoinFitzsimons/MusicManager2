@@ -40,5 +40,5 @@ The application provides several features for managing songs and playlists:
 
 ## Extras
 
-For more information, please visit the EoinFitzsimons/MusicManager2 repository on GitHub.
+For more information, please visit the EoinFitzsimons/MusicManager2 repository on GitHub. Activates through a menu item and a keyboard shortcut.
 
