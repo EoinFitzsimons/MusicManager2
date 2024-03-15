@@ -139,28 +139,27 @@ public class DLList implements LinkedListInterface {
         return false;
     }
 
-public void loopList() {
-    if (head == null) {
-        System.out.println("The playlist is empty.");
-        return;
-    }
-    Node current = head;
-    while (repeat && current != null) {
-        System.out.println(current.getElement());
-        try { // pausing so the songs don't just blitz through
-            Thread.sleep(1000); // Pause for 1 second
-        } catch (InterruptedException e) { // if interupted elsewhere it stops
-            repeat = false;
+    public void loopList() {
+        if (head == null) {
+            System.out.println("The playlist is empty.");
+            return;
         }
-        if (current.getNext() != null) {// whilere there are more songs
-            current = current.getNext();
-        } else {
-            current = head; //back to the start of the list
-            System.out.println("The playlist has looped back to the start.");// to show this works
+
+        Node current = head;
+        while (repeat) {
+            System.out.println(current.getElement());
+            try {
+                Thread.sleep(100); // Pause for 0.1 seconds
+            } catch (InterruptedException e) {
+                repeat = false;
+            }
+
+            if (current.getNext() != null) {
+                current = current.getNext();
+            } else {
+                current = head; // Loop back to the start of the list
+                System.out.println("The playlist has looped back to the start.");
+            }
         }
     }
-}
-
-
-
 }

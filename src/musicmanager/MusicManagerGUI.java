@@ -104,6 +104,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         likedTA.setLineWrap(true);
         likedTA.setRows(5);
         likedTA.setFocusable(false);
+        likedTA.setMaximumSize(new java.awt.Dimension(140, 300));
         likedTA.setPreferredSize(new java.awt.Dimension(140, 300));
         likedSP.setViewportView(likedTA);
 
@@ -112,16 +113,16 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         likedPanelLayout.setHorizontalGroup(
             likedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(likedPanelLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(likedSP, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
+                .addContainerGap()
+                .addComponent(likedSP, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addContainerGap())
         );
         likedPanelLayout.setVerticalGroup(
             likedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(likedPanelLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(likedSP, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
+                .addContainerGap()
+                .addComponent(likedSP)
+                .addContainerGap())
         );
 
         genrePanel.setBackground(new java.awt.Color(80, 45, 150));
@@ -140,6 +141,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         playlistTA.setLineWrap(true);
         playlistTA.setRows(5);
         playlistTA.setFocusable(false);
+        playlistTA.setMaximumSize(new java.awt.Dimension(140, 300));
         playlistTA.setPreferredSize(new java.awt.Dimension(140, 300));
         playlistSP.setViewportView(playlistTA);
 
@@ -147,17 +149,17 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         genrePanel.setLayout(genrePanelLayout);
         genrePanelLayout.setHorizontalGroup(
             genrePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(genrePanelLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(playlistSP, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, genrePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(playlistSP, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addContainerGap())
         );
         genrePanelLayout.setVerticalGroup(
             genrePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, genrePanelLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(playlistSP, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
+                .addContainerGap()
+                .addComponent(playlistSP)
+                .addContainerGap())
         );
 
         selectorPanel.setBackground(new java.awt.Color(80, 45, 150));
@@ -322,7 +324,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
                         .addComponent(deleteBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(moveBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 46, Short.MAX_VALUE))
                     .addComponent(likedPanel, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                     .addComponent(genrePanel, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -394,7 +396,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
                     .addComponent(playBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nextBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(prevBTN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         controlsM.setText("Controls");
@@ -419,7 +421,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
         );
 
         pack();
@@ -429,23 +431,27 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     DLList badPlaylist = new DLList();
     static boolean repeat = false; // declare repeat status
     private void repeatMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repeatMIActionPerformed
-        // TODO add your handling code here:
 
-        repeat = !repeat; // Toggle the status
-        repeatLBL.setText(repeat ? "Repeat" : ""); //shows repeat if it's on
-        if (repeat && (!goodPlaylist.isEmpty() || !badPlaylist.isEmpty())) {
-            if (goodRB.isSelected() && !goodPlaylist.isEmpty()) {
-                // Start looping through the list
-                new Thread(() -> goodPlaylist.loopList()).start();
-            } else if (badRB.isSelected() && !badPlaylist.isEmpty()) {
-                // Start looping through the list
-                new Thread(() -> badPlaylist.loopList()).start();
-            }
+        // Toggle the repeat status
+        repeat = !repeat;
+        repeatLBL.setText(repeat ? "Repeat" : ""); // Shows 'Repeat' if it's on
+
+        // Start looping through the selected playlist if it's not empty
+        if (repeat && goodRB.isSelected() && !goodPlaylist.isEmpty()) {
+            new Thread(() -> {
+                goodPlaylist.loopList();
+                System.out.println("The Good Playlist has looped back to the start.");
+            }).start();
+        } else if (repeat && badRB.isSelected() && !badPlaylist.isEmpty()) {
+            new Thread(() -> {
+                badPlaylist.loopList();
+                System.out.println("The Bad Playlist has looped back to the start.");
+            }).start();
         }
     }//GEN-LAST:event_repeatMIActionPerformed
 
     private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
-        // TODO add your handling code here:
+
         String song = JOptionPane.showInputDialog("Enter a song to delete:");
         if (goodPlaylist.contains(song)) {// If the song is in the good playlist
             goodPlaylist.remove(song);
@@ -463,7 +469,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteBTNActionPerformed
 //delete and search self explanatory here
     private void SearchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBTNActionPerformed
-        // TODO add your handling code here:
+
         String song = JOptionPane.showInputDialog("Enter a song to search:");
         if (goodPlaylist.contains(song)) {// If the song is in the good playlist
             JOptionPane.showMessageDialog(null, "The song is in the Good Playlist.");
@@ -479,7 +485,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchBTNActionPerformed
 
     private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
-        // TODO add your handling code here:
+
         // If there are any liked songs and a playlist is selected
         if (!likedSongs.isEmpty() && (goodRB.isSelected() || badRB.isSelected())) {
             String song = (String) likedSongs.pop();// Pop off top song
@@ -510,51 +516,66 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addBTNActionPerformed
 
     private void createBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBTNActionPerformed
-        // TODO add your handling code here:
         // If the likedSongs stack is not full
         if (likedSongs.size() < 10) {
-            likedSongs.push(JOptionPane.showInputDialog("Please enter a song"));
-            likedTA.setText(likedSongs.display());
-            likedLBL.setText("Liked " + likedSongs.size());
+            String song = JOptionPane.showInputDialog("Please enter a song");
+            if (song != null && !song.trim().isEmpty()) {// inverse of trim being empty ensures there is at least one character with a physical representation ie not whitespace
+                // If the input is not null and not blank
+                likedSongs.push(song);
+                likedTA.setText(likedSongs.display());
+                likedLBL.setText("Liked " + likedSongs.size());
+            } else {
+                // If the input is null or blank
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a song.");
+            }
         } else {
             // If the likedSongs stack is full
             JOptionPane.showMessageDialog(null, "You cannot add more songs. The liked songs list is full.");
             createBTN.setEnabled(false); // Disable the create button
         }
+
     }//GEN-LAST:event_createBTNActionPerformed
 
     private void badRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_badRBActionPerformed
-        // TODO add your handling code here:
+        // Update the display
         playlistTA.setText(badPlaylist.printList());
         genresongsLBL.setText("Playlist " + badPlaylist.size());
+
+        // If it is repeating, stop the current loop and start looping the badPlaylist
         if (repeat) {
-            // Stop looping the badPlaylist
             repeat = false;
-            // Start looping the goodPlaylist
+            try {
+                Thread.sleep(100); // Pause for 0.1 seconds
+            } catch (InterruptedException e) {
+            }
             new Thread(() -> {
                 repeat = true;
-                goodPlaylist.loopList();
+                badPlaylist.loopList();
             }).start();
         }
     }//GEN-LAST:event_badRBActionPerformed
 
     private void goodRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goodRBActionPerformed
-        // TODO add your handling code here:
+        // Update the display
         playlistTA.setText(goodPlaylist.printList());
         genresongsLBL.setText("Playlist " + goodPlaylist.size());
-        if (repeat) {// if it is repeating
-            // Stop looping the goodPlaylist
+
+        // If it is repeating, stop the current loop and start looping the goodPlaylist
+        if (repeat) {
             repeat = false;
-            // Start looping the badPlaylist
-            new Thread(() -> { //allows this to run without disupting the main flow of code
+            try {
+                Thread.sleep(100); // Pause for 0.1 seconds
+            } catch (InterruptedException e) {
+            }
+            new Thread(() -> {
                 repeat = true;
-                badPlaylist.loopList();
+                goodPlaylist.loopList();
             }).start();
         }
     }//GEN-LAST:event_goodRBActionPerformed
 
     private void moveBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveBTNActionPerformed
-        // TODO add your handling code here:
+
         // Control the loop
         boolean continueMoving = true;
 
