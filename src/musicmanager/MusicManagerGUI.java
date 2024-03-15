@@ -469,36 +469,44 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         return sb.toString().trim();
     }
     private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
-        String song = JOptionPane.showInputDialog("Enter a song to delete:");
-        song = toTitleCase(song); // Convert to title case
-        if (goodPlaylist.contains(song)) {// If the song is in the good playlist
-            goodPlaylist.remove(song);
-            JOptionPane.showMessageDialog(null, "The song has been removed from the Good Playlist.");
-            playlistTA.setText(goodPlaylist.printList());
-            genresongsLBL.setText("Playlist " + goodPlaylist.size());
-        } else if (badPlaylist.contains(song)) {// If the song is in the bad playlist
-            badPlaylist.remove(song);
-            JOptionPane.showMessageDialog(null, "The song has been removed from the Bad Playlist.");
-            playlistTA.setText(badPlaylist.printList());
-            genresongsLBL.setText("Playlist " + badPlaylist.size());
+        if (goodPlaylist.isEmpty() && badPlaylist.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "There are no songs in either playlist.");
         } else {
-            JOptionPane.showMessageDialog(null, "The song is not in any playlist.");
+            String song = JOptionPane.showInputDialog("Enter a song to delete:");
+            song = toTitleCase(song); // Convert to title case
+            if (goodPlaylist.contains(song)) {// If the song is in the good playlist
+                goodPlaylist.remove(song);
+                JOptionPane.showMessageDialog(null, "The song has been removed from the Good Playlist.");
+                playlistTA.setText(goodPlaylist.printList());
+                genresongsLBL.setText("Playlist " + goodPlaylist.size());
+            } else if (badPlaylist.contains(song)) {// If the song is in the bad playlist
+                badPlaylist.remove(song);
+                JOptionPane.showMessageDialog(null, "The song has been removed from the Bad Playlist.");
+                playlistTA.setText(badPlaylist.printList());
+                genresongsLBL.setText("Playlist " + badPlaylist.size());
+            } else {
+                JOptionPane.showMessageDialog(null, "The song is not in any playlist.");
+            }
         }
     }//GEN-LAST:event_deleteBTNActionPerformed
 //delete and search self explanatory here
     private void SearchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBTNActionPerformed
-        String song = JOptionPane.showInputDialog("Enter a song to search:");
-        song = toTitleCase(song); // Convert to title case
-        if (goodPlaylist.contains(song)) {// If the song is in the good playlist
-            JOptionPane.showMessageDialog(null, "The song is in the Good Playlist.");
-            playlistTA.setText(goodPlaylist.printList());
-            genresongsLBL.setText("Playlist " + goodPlaylist.size());
-        } else if (badPlaylist.contains(song)) {// If the song is in the bad playlist
-            JOptionPane.showMessageDialog(null, "The song is in the Bad Playlist.");
-            playlistTA.setText(badPlaylist.printList());
-            genresongsLBL.setText("Playlist " + badPlaylist.size());
+        if (goodPlaylist.isEmpty() && badPlaylist.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "There are no songs in either playlist.");
         } else {
-            JOptionPane.showMessageDialog(null, "The song is not in any playlist.");
+            String song = JOptionPane.showInputDialog("Enter a song to search:");
+            song = toTitleCase(song); // Convert to title case
+            if (goodPlaylist.contains(song)) {// If the song is in the good playlist
+                JOptionPane.showMessageDialog(null, "The song is in the Good Playlist.");
+                playlistTA.setText(goodPlaylist.printList());
+                genresongsLBL.setText("Playlist " + goodPlaylist.size());
+            } else if (badPlaylist.contains(song)) {// If the song is in the bad playlist
+                JOptionPane.showMessageDialog(null, "The song is in the Bad Playlist.");
+                playlistTA.setText(badPlaylist.printList());
+                genresongsLBL.setText("Playlist " + badPlaylist.size());
+            } else {
+                JOptionPane.showMessageDialog(null, "The song is not in any playlist.");
+            }
         }
     }//GEN-LAST:event_SearchBTNActionPerformed
 
@@ -536,7 +544,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         // If the likedSongs stack is not full
         if (likedSongs.size() < 10) {
             String song = JOptionPane.showInputDialog("Please enter a song");
-            
+
             if (song != null && !song.trim().isEmpty()) {// inverse of trim being empty ensures there is at least one character with a physical representation ie not whitespace
                 // If the input is not null and not blank
                 song = toTitleCase(song); // Convert to title case
@@ -595,48 +603,52 @@ public class MusicManagerGUI extends javax.swing.JFrame {
 
     private void moveBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveBTNActionPerformed
         // Control the loop
-        boolean continueMoving = true;
+        if (goodPlaylist.isEmpty() && badPlaylist.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "There are no songs in either playlist.");
+        } else {
+            boolean continueMoving = true;
 
-        while (continueMoving) {
-            String song = JOptionPane.showInputDialog("Enter a song to move:");
+            while (continueMoving) {
+                String song = JOptionPane.showInputDialog("Enter a song to move:");
 
-            if (goodPlaylist.contains(song) && badPlaylist.contains(song)) {
-                // If the song is in both playlists
-                JOptionPane.showMessageDialog(null, "The song is in both playlists and cannot be moved.");
-            } else if (goodPlaylist.contains(song) && badPlaylist.size() < 10) {
-                // If the song is in the good playlist and the bad playlist is not full
-                goodPlaylist.remove(song);
-                badPlaylist.add(song);
-                JOptionPane.showMessageDialog(null, "The song has been moved to the Bad Playlist.");
-            } else if (badPlaylist.contains(song) && goodPlaylist.size() < 10) {
-                // If the song is in the bad playlist and the good playlist is not full
-                badPlaylist.remove(song);
-                goodPlaylist.add(song);
-                JOptionPane.showMessageDialog(null, "The song has been moved to the Good Playlist.");
-            } else if ((goodPlaylist.contains(song) && badPlaylist.size() > 9) || badPlaylist.contains(song) && goodPlaylist.size() > 9) {//If the song is in either playlist and the opposite playlist is full.
-                JOptionPane.showMessageDialog(null, "The destination playlist is full.");
+                if (goodPlaylist.contains(song) && badPlaylist.contains(song)) {
+                    // If the song is in both playlists
+                    JOptionPane.showMessageDialog(null, "The song is in both playlists and cannot be moved.");
+                } else if (goodPlaylist.contains(song) && badPlaylist.size() < 10) {
+                    // If the song is in the good playlist and the bad playlist is not full
+                    goodPlaylist.remove(song);
+                    badPlaylist.add(song);
+                    JOptionPane.showMessageDialog(null, "The song has been moved to the Bad Playlist.");
+                } else if (badPlaylist.contains(song) && goodPlaylist.size() < 10) {
+                    // If the song is in the bad playlist and the good playlist is not full
+                    badPlaylist.remove(song);
+                    goodPlaylist.add(song);
+                    JOptionPane.showMessageDialog(null, "The song has been moved to the Good Playlist.");
+                } else if ((goodPlaylist.contains(song) && badPlaylist.size() > 9) || badPlaylist.contains(song) && goodPlaylist.size() > 9) {//If the song is in either playlist and the opposite playlist is full.
+                    JOptionPane.showMessageDialog(null, "The destination playlist is full.");
 
-            } else {//
-                JOptionPane.showMessageDialog(null, "The song is not in either playlist.");
+                } else {//
+                    JOptionPane.showMessageDialog(null, "The song is not in either playlist.");
+                }
+
+                // Ask if they want to move more 
+                int response = JOptionPane.showConfirmDialog(null, "Do you want to move more songs?", "Confirm",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                if (response == JOptionPane.NO_OPTION) {
+                    // If no, exit the loop
+                    continueMoving = false;
+                }
             }
 
-            // Ask if they want to move more 
-            int response = JOptionPane.showConfirmDialog(null, "Do you want to move more songs?", "Confirm",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-            if (response == JOptionPane.NO_OPTION) {
-                // If no, exit the loop
-                continueMoving = false;
+            // After all moves are done, update the display based on good or bad selected
+            if (goodRB.isSelected()) {
+                playlistTA.setText(goodPlaylist.printList());
+                genresongsLBL.setText("Playlist " + goodPlaylist.size());
+            } else if (badRB.isSelected()) {
+                playlistTA.setText(badPlaylist.printList());
+                genresongsLBL.setText("Playlist " + badPlaylist.size());
             }
-        }
-
-        // After all moves are done, update the display based on good or bad selected
-        if (goodRB.isSelected()) {
-            playlistTA.setText(goodPlaylist.printList());
-            genresongsLBL.setText("Playlist " + goodPlaylist.size());
-        } else if (badRB.isSelected()) {
-            playlistTA.setText(badPlaylist.printList());
-            genresongsLBL.setText("Playlist " + badPlaylist.size());
         }
     }//GEN-LAST:event_moveBTNActionPerformed
 
