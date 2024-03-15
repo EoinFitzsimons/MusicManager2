@@ -480,29 +480,47 @@ public class MusicManagerGUI extends javax.swing.JFrame {
 
     private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
         // TODO add your handling code here:
-        if (!likedSongs.isEmpty() && (goodRB.isSelected() || badRB.isSelected())) { // if there are any liked songs and no point continuing if a playlist isn't selected
+        // If there are any liked songs and a playlist is selected
+        if (!likedSongs.isEmpty() && (goodRB.isSelected() || badRB.isSelected())) {
             String song = (String) likedSongs.pop();// Pop off top song
-            if (goodRB.isSelected()) {
+            if (goodRB.isSelected() && goodPlaylist.size() < 10) {// limiting playlists to 10
                 goodPlaylist.add(song);
                 playlistTA.setText(goodPlaylist.printList());
                 genresongsLBL.setText("Playlist " + goodPlaylist.size());
                 likedLBL.setText("Liked " + likedSongs.size());
-            } else if (badRB.isSelected()) {
+            } else if (badRB.isSelected() && badPlaylist.size() < 10) {// limiting playlists to 10
                 badPlaylist.add(song);
                 playlistTA.setText(badPlaylist.printList());
                 genresongsLBL.setText("Playlist " + badPlaylist.size());
                 likedLBL.setText("Liked " + likedSongs.size());
+            } else {
+                JOptionPane.showMessageDialog(null, "The selected playlist is full.");
+                addBTN.setEnabled(false); // Disable the add button
             }
             likedTA.setText(likedSongs.display()); //Update liked songs to show the song is gone
             likedLBL.setText("Liked " + likedSongs.size());
+            if (likedSongs.size() < 10) { // If the likedSongs stack is not full after popping
+                createBTN.setEnabled(true); // Enable the create button
+            }
+        } else if (likedSongs.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "There are no liked songs to add.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a playlist to add the song to.");
         }
     }//GEN-LAST:event_addBTNActionPerformed
 
     private void createBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBTNActionPerformed
         // TODO add your handling code here:
-        likedSongs.push(JOptionPane.showInputDialog("Please enter a song"));
-        likedTA.setText(likedSongs.display());
-        likedLBL.setText("Liked " + likedSongs.size());
+        // If the likedSongs stack is not full
+        if (likedSongs.size() < 10) {
+            likedSongs.push(JOptionPane.showInputDialog("Please enter a song"));
+            likedTA.setText(likedSongs.display());
+            likedLBL.setText("Liked " + likedSongs.size());
+        } else {
+            // If the likedSongs stack is full
+            JOptionPane.showMessageDialog(null, "You cannot add more songs. The liked songs list is full.");
+            createBTN.setEnabled(false); // Disable the create button
+        }
     }//GEN-LAST:event_createBTNActionPerformed
 
     private void badRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_badRBActionPerformed
@@ -537,24 +555,30 @@ public class MusicManagerGUI extends javax.swing.JFrame {
 
     private void moveBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveBTNActionPerformed
         // TODO add your handling code here:
-        //control the loop
+        // Control the loop
         boolean continueMoving = true;
 
         while (continueMoving) {
             String song = JOptionPane.showInputDialog("Enter a song to move:");
 
-            if (goodPlaylist.contains(song)) {
-                // If the song is in the good playlist
-                goodPlaylist.remove(song); // Remove the song from the good playlist
-                badPlaylist.add(song); // Add the song to the bad playlist
+            if (goodPlaylist.contains(song) && badPlaylist.contains(song)) {
+                // If the song is in both playlists
+                JOptionPane.showMessageDialog(null, "The song is in both playlists and cannot be moved.");
+            } else if (goodPlaylist.contains(song) && badPlaylist.size() < 10) {
+                // If the song is in the good playlist and the bad playlist is not full
+                goodPlaylist.remove(song);
+                badPlaylist.add(song);
                 JOptionPane.showMessageDialog(null, "The song has been moved to the Bad Playlist.");
-            } else if (badPlaylist.contains(song)) {
-                // If the song is in the bad playlist
-                badPlaylist.remove(song); // Remove the song from the bad playlist
-                goodPlaylist.add(song); // Add the song to the good playlist
+            } else if (badPlaylist.contains(song) && goodPlaylist.size() < 10) {
+                // If the song is in the bad playlist and the good playlist is not full
+                badPlaylist.remove(song);
+                goodPlaylist.add(song);
                 JOptionPane.showMessageDialog(null, "The song has been moved to the Good Playlist.");
-            } else {
-                JOptionPane.showMessageDialog(null, "The song is not in any playlist.");
+            } else if ((goodPlaylist.contains(song) && badPlaylist.size() > 9) || badPlaylist.contains(song) && goodPlaylist.size() > 9) {//If the song is in either playlist and the opposite playlist is full.
+                JOptionPane.showMessageDialog(null, "The destination playlist is full.");
+
+            } else {//
+                JOptionPane.showMessageDialog(null, "The song is not in either playlist.");
             }
 
             // Ask if they want to move more 
@@ -562,7 +586,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
             if (response == JOptionPane.NO_OPTION) {
-                // if no, exit the loop
+                // If no, exit the loop
                 continueMoving = false;
             }
         }
