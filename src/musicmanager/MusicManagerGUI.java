@@ -431,7 +431,6 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     DLList badPlaylist = new DLList();
     static boolean repeat = false; // declare repeat status
     private void repeatMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repeatMIActionPerformed
-
         // Toggle the repeat status
         repeat = !repeat;
         repeatLBL.setText(repeat ? "Repeat" : ""); // Shows 'Repeat' if it's on
@@ -450,26 +449,26 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_repeatMIActionPerformed
 // Define a method to convert inputs to the same case.
-public static String toTitleCase(String givenString) {
-    // Split the input string into an array of words
-    String[] arr = givenString.split(" "); // Also works for multiple spaces in a row.
-    // Create a StringBuilder to build the output string
-    StringBuilder sb = new StringBuilder();
 
-    // Loop through each word in the array
-    for (int i = 0; i < arr.length; i++) {
-        // Append the first character of the word converted to uppercase
-        sb.append(Character.toUpperCase(arr[i].charAt(0)))
-            // Append the rest of the word converted to lowercase
-            .append(arr[i].substring(1).toLowerCase())
-            // Append a space after each word
-            .append(" ");
-    }          
-    // Return the output string with leading and trailing spaces removed
-    return sb.toString().trim();
-} 
+    public static String toTitleCase(String givenString) {
+        // Split the input string into an array of words
+        String[] arr = givenString.split(" "); // Also works for multiple spaces in a row.
+        // Create a StringBuilder to build the output string
+        StringBuilder sb = new StringBuilder();
+
+        // Loop through each word in the array
+        for (int i = 0; i < arr.length; i++) {
+            // Append the first character of the word converted to uppercase
+            sb.append(Character.toUpperCase(arr[i].charAt(0)))
+                    // Append the rest of the word converted to lowercase
+                    .append(arr[i].substring(1).toLowerCase())
+                    // Append a space after each word
+                    .append(" ");
+        }
+        // Return the output string with leading and trailing spaces removed
+        return sb.toString().trim();
+    }
     private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
-
         String song = JOptionPane.showInputDialog("Enter a song to delete:");
         song = toTitleCase(song); // Convert to title case
         if (goodPlaylist.contains(song)) {// If the song is in the good playlist
@@ -488,7 +487,6 @@ public static String toTitleCase(String givenString) {
     }//GEN-LAST:event_deleteBTNActionPerformed
 //delete and search self explanatory here
     private void SearchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBTNActionPerformed
-
         String song = JOptionPane.showInputDialog("Enter a song to search:");
         song = toTitleCase(song); // Convert to title case
         if (goodPlaylist.contains(song)) {// If the song is in the good playlist
@@ -505,7 +503,6 @@ public static String toTitleCase(String givenString) {
     }//GEN-LAST:event_SearchBTNActionPerformed
 
     private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
-
         // If there are any liked songs and a playlist is selected
         if (!likedSongs.isEmpty() && (goodRB.isSelected() || badRB.isSelected())) {
             String song = (String) likedSongs.pop();// Pop off top song
@@ -596,7 +593,6 @@ public static String toTitleCase(String givenString) {
     }//GEN-LAST:event_goodRBActionPerformed
 
     private void moveBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveBTNActionPerformed
-
         // Control the loop
         boolean continueMoving = true;
 
