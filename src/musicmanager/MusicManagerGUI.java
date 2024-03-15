@@ -449,10 +449,20 @@ public class MusicManagerGUI extends javax.swing.JFrame {
             }).start();
         }
     }//GEN-LAST:event_repeatMIActionPerformed
+public static String toTitleCase(String givenString) {
+    String[] arr = givenString.split(" ");
+    StringBuilder sb = new StringBuilder();
 
+    for (int i = 0; i < arr.length; i++) {
+        sb.append(Character.toUpperCase(arr[i].charAt(0)))
+            .append(arr[i].substring(1)).append(" ");
+    }          
+    return sb.toString().trim();
+}  
     private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
 
         String song = JOptionPane.showInputDialog("Enter a song to delete:");
+        song = toTitleCase(song); // Convert to title case
         if (goodPlaylist.contains(song)) {// If the song is in the good playlist
             goodPlaylist.remove(song);
             JOptionPane.showMessageDialog(null, "The song has been removed from the Good Playlist.");
@@ -471,6 +481,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
     private void SearchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBTNActionPerformed
 
         String song = JOptionPane.showInputDialog("Enter a song to search:");
+        song = toTitleCase(song); // Convert to title case
         if (goodPlaylist.contains(song)) {// If the song is in the good playlist
             JOptionPane.showMessageDialog(null, "The song is in the Good Playlist.");
             playlistTA.setText(goodPlaylist.printList());
@@ -519,6 +530,7 @@ public class MusicManagerGUI extends javax.swing.JFrame {
         // If the likedSongs stack is not full
         if (likedSongs.size() < 10) {
             String song = JOptionPane.showInputDialog("Please enter a song");
+            song = toTitleCase(song); // Convert to title case
             if (song != null && !song.trim().isEmpty()) {// inverse of trim being empty ensures there is at least one character with a physical representation ie not whitespace
                 // If the input is not null and not blank
                 likedSongs.push(song);
